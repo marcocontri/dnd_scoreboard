@@ -1,0 +1,44 @@
+@if (!isEditing) {
+<h2 (click)="modifyVisitorName()">{{visitorSquadName}}</h2>
+}@else {
+<input type="text" placeholder="Inserisci nome squadra" #newName [value]="" (keyup.enter)="saveNameSquad(newName.value)"
+    (blur)="saveNameSquad(newName.value )">
+}
+<form>
+    <div>
+        <form>
+            <input type="button" class="btn btn-primary btn-lg" id="visitorScoreBtn" (click)="incrementVisitorScore()"
+                value="{{visitorScore}}">&nbsp;&nbsp;&nbsp;&nbsp;
+                <!-- sezione falli -->
+                 @if (visitorFouls === 0) {
+                    <i class="bi bi-0-circle fs-2" (click)="incrementVisitorFouls()"></i>
+                 }
+                 @if (visitorFouls === 1) {
+                    <i class="bi bi-1-circle fs-2" (click)="incrementVisitorFouls()"></i>
+                 }
+                 @if (visitorFouls === 2) {
+                    <i class="bi bi-2-circle fs-2" (click)="incrementVisitorFouls()"></i>
+                 }
+                 @if (visitorFouls === 3) {
+                    <i class="bi bi-3-circle fs-2" (click)="incrementVisitorFouls()"></i>
+                 }
+                 @if (visitorFouls === 4) {
+                    <i class="bi bi-4-circle fs-2" (click)="incrementVisitorFouls()"></i>
+                 }
+                 @if (visitorFouls === 5) {
+                    <i class="bi bi-5-circle fs-2" (click)="incrementVisitorFouls()"></i>
+                 }
+                 @if (visitorFouls === 6) {
+                    <i class="bi bi-6-circle fs-2" style="color: red;" (click)="incrementVisitorFouls()"></i>
+                 }
+                 <!-- &nbsp;&nbsp;&nbsp;&nbsp;<label id="visitorFouls" (click)="incrementVisitorFouls()"
+                class="btn btn-outline-danger">{{visitorFouls}}</label> -->
+            <br><br>
+            <input type="button" class="btn btn-secondary" id="modifyScoreBtn" (click)="decrementVisitorScore()"
+                value="-1">
+            <br>
+            <button type="reset" title="Reset" class="btn btn-dark" id="resetScoreVisitor" (click)="resetVisitors()"><i
+                    class="bi bi-x">Reset</i></button>
+        </form>
+    </div>
+</form>
