@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-visitor-component',
@@ -8,28 +8,31 @@ import { Component } from '@angular/core';
 })
 export class VisitorComponent {
 
-  visitorScore: number
-  visitorFouls: number
+  visitorScore = signal(0)
+  visitorFouls = signal(0)
   visitorSquadName: string
   isEditing: boolean
 
   constructor() {
-    this.visitorScore = 0
-    this.visitorFouls = 0
     this.visitorSquadName = "Ospiti"
     this.isEditing = false
   }
   incrementVisitorScore() {
-    this.visitorScore++
+    this.visitorScore.update(v => v + 1)
   }
   decrementVisitorScore() {
-    if (!(this.visitorScore === 0))
+    if (!(this.visitorScore() === 0))
       // visitorScore non può essere < 0!
-      this.visitorScore--
+      this.visitorScore.update(v => v - 1)
   }
   incrementVisitorFouls() {
-    if (!(this.visitorFouls === 6))
-      this.visitorFouls++
+    if (!(this.visitorFouls() === 6))
+      this.visitorFouls.update(v => v + 1)
+  }
+  decrementVisitorFouls() {
+    if(this.visitorFouls() > 0){
+      this.visitorFouls.update(v => v-1)
+    }
   }
   modifyVisitorName() {
     this.isEditing = true
@@ -40,8 +43,8 @@ export class VisitorComponent {
     this.isEditing = false
   }
   resetVisitors() {
-    this.visitorScore = 0
-    this.visitorFouls = 0
+    this.visitorScore.set(0)
+    this.visitorFouls.set(0)
     this.visitorSquadName = "Ospiti"
   }
 }
