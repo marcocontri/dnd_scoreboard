@@ -26,7 +26,7 @@ export class VisitorComponent {
       this.visitorScore.update(v => v - 1)
   }
   incrementVisitorFouls() {
-    if (!(this.visitorFouls() === 6))
+    if (!(this.visitorFouls() === 5))
       this.visitorFouls.update(v => v + 1)
   }
   decrementVisitorFouls() {
@@ -46,5 +46,9 @@ export class VisitorComponent {
     this.visitorScore.set(0)
     this.visitorFouls.set(0)
     this.visitorSquadName = "Ospiti"
+  }
+
+  showSponsor(){
+    // se premuto manda ad una pagina che mostra gli sponsor per 1 minuto
   }
 }
