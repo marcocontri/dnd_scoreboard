@@ -1,0 +1,50 @@
+<div class="home-border">
+   @if (!isEditing) {
+   <h2 (click)="modifyHomeName()">{{homeSquadName}}</h2>
+   }@else {
+   <input type="text" placeholder="Inserisci nome squadra" #newName [value]=""
+      (keyup.enter)="saveNameSquad(newName.value)" (blur)="saveNameSquad(newName.value )">
+   }
+   @if (homeFouls() > 4) {
+      BONUS
+      <!-- abbellire -->
+   }
+   <div>
+      <form>
+         <input type="button" class="btn btn-primary btn-lg" id="HomeScoreBtn" (click)="incrementHomeScore()"
+            value="{{homeScore()}}">&nbsp;&nbsp;&nbsp;
+         <!-- sezione falli -->
+         <a class="btn">
+            @if (homeFouls() === 0) {
+            <i class="bi bi-0-circle fs-2" (click)="incrementHomeFouls()"></i>
+            }
+            @if (homeFouls() === 1) {
+            <i class="bi bi-1-circle fs-2" (click)="incrementHomeFouls()"></i>
+            }
+            @if (homeFouls() === 2) {
+            <i class="bi bi-2-circle fs-2" (click)="incrementHomeFouls()"></i>
+            }
+            @if (homeFouls() === 3) {
+            <i class="bi bi-3-circle fs-2" (click)="incrementHomeFouls()"></i>
+            }
+            @if (homeFouls() === 4) {
+            <i class="bi bi-4-circle fs-2" style="color: red;" (click)="incrementHomeFouls()"></i>
+            }
+            @if (homeFouls() === 5) {
+            <i class="bi bi-5-circle fs-2 btn-danger" style="color: red;" (click)="incrementHomeFouls()"></i>
+            }
+         </a>
+         <br><br>
+         <input type="button" class="btn btn-secondary" id="modifyScoreBtn" (click)="decrementHomeScore()"
+            value="-1">&nbsp;&nbsp;&nbsp;&nbsp;
+         <a class="btn" (click)="decrementHomeFouls()">(-1)</a>
+         <br>
+         <br>
+         <button type="button" title="Reset" class="btn btn-dark" id="resetHome" (click)="resetHome()"><i
+               class="bi bi-x">Reset</i></button>
+      </form>
+   </div>
+</div>
+<div>
+   <a class="btn btn-info" routerLink="/timeout">Timeout</a>
+</div>
