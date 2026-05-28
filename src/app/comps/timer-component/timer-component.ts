@@ -98,7 +98,11 @@ export class TimerComponent {
   }
 
   playBuzzer() {
-    alert("fine tempo!")
+    // alert("fine tempo!")
+    const audio = new Audio()
+    audio.src = "sounds/mega-horn.mp3"
+    audio.load()
+    audio.play()
   }
 
   enableEdit() {
