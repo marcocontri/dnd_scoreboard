@@ -10,11 +10,12 @@ export class TabelloneService {
   homeScore = signal<number>(0);
   homeFouls = signal<number>(0);
   // squadra OSPITE
-  visitorSquadName = signal<string>("Squadra Casa");
+  visitorSquadName = signal<string>("Squadra Ospite");
   visitorScore = signal<number>(0);
   visitorFouls = signal<number>(0);
   
-  isEditing = signal<boolean>(false);
+  isEditingHome = signal<boolean>(false);
+  isEditingVisitor = signal<boolean>(false);
 
   // punteggio
   incrementHomeScore(){

@@ -19,18 +19,18 @@ export class HomeComponent {
   }
 
   get isEditing() {
-    return this.tabelloneService.isEditing()
+    return this.tabelloneService.isEditingHome()
   }
 
   incrementHomeScore() { this.tabelloneService.incrementHomeScore() }
   decrementHomeScore() { this.tabelloneService.decrementHomeScore() }
   incrementHomeFouls() { this.tabelloneService.incrementHomeFouls() }
   decrementHomeFouls() { this.tabelloneService.decrementHomeFouls() }
-  modifyHomeName() { this.tabelloneService.isEditing.set(true) }
+  modifyHomeName() { this.tabelloneService.isEditingHome.set(true) }
   saveNameSquad(newName: string) {
     if (newName.trim())
       this.tabelloneService.homeSquadName.set(newName)
-    this.tabelloneService.isEditing.set(false)
+    this.tabelloneService.isEditingHome.set(false)
   }
   resetHome() { this.tabelloneService.resetHome()}
 }
