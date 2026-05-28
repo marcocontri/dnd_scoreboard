@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { TabelloneService } from '../../services/tabellone-service';
+import { TabelloneService } from '../../services/tabellone/tabellone-service';
 
 @Component({
   selector: 'home-component',

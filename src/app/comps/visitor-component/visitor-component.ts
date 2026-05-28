@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TabelloneService } from '../../services/tabellone-service';
+import { TabelloneService } from '../../services/tabellone/tabellone-service';
 import { RouterLink } from '@angular/router';
 
 @Component({
