@@ -1,4 +1,3 @@
-/* Contenitore flessibile verticale: tiene la scheda sopra e il timeout sotto centrato */
 .team-wrapper {
   display: flex;
   flex-direction: row-reverse;
@@ -12,7 +11,6 @@
   font-family: sans-serif;
 }
 
-/* Scheda Principale della Squadra */
 .team-card {
   width: 100%;
   background-color: #0f0f12;
@@ -23,9 +21,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;}
+
+.team-card:hover{
+  border-color: #f830ff;
+  transform: scale(1.01);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(248, 48, 255, 0.15);
 }
 
-/* Gestione Nome Squadra */
 .name-container {
   width: 100%;
   height: auto;
@@ -43,9 +46,8 @@
   cursor: pointer;
   text-align: center;
   transition: color 0.2s;
-
   width: 100%;
-  word-wrap: break-word;      /* Spezza le parole se sono infinitamente lunghe */
+  word-wrap: break-word;
   overflow-wrap: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -73,14 +75,13 @@
   border-color: #ff3b30;
 }
 
-/* Zona Bonus */
 .bonus-zone {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;         /* Altezza fissa per il badge */
-  margin-top: 5px;      /* Spazio di sicurezza sotto al nome */
-  margin-bottom: 15px;  /* Spazio di sicurezza sopra ai punti */
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 15px;
   width: 100%;
 }
 
@@ -95,7 +96,6 @@
   box-shadow: 0 0 10px rgba(255, 59, 48, 0.6);
 }
 
-/* Animazione pulsante per il Bonus */
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.95); }
@@ -104,7 +104,6 @@
   animation: pulse 1s infinite;
 }
 
-/* Layout Punteggio + Falli */
 .score-fouls-display {
   display: flex;
   width: 100%;
@@ -127,14 +126,13 @@
   letter-spacing: 1.5px;
 }
 
-/* Punteggio Elettronico Enorme */
 .score-digit {
   background: none;
   border: none;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14rem; /* Numero mastodontico */
+  font-size: 14rem;
   font-weight: 900;
-  color: #ff3b30; /* Stesso rosso luminoso del timer */
+  color: #ff3b30;
   cursor: pointer;
   outline: none;
   padding: 0;
@@ -147,7 +145,6 @@
   transform: scale(0.95);
 }
 
-/* Bottone dei Falli */
 .fouls-icon-btn {
   background: none;
   border: none;
@@ -167,7 +164,6 @@
   transform: scale(0.95);
 }
 
-/* Quando la squadra entra in situazione di pericolo falli */
 .fouls-danger {
   color: #ff3b30;
   filter: drop-shadow(0 0 10px rgba(255, 59, 48, 0.5));
@@ -178,7 +174,6 @@
   font-weight: 900;
 }
 
-/* Pulsanti di Modifica Secondari (In basso, discreti) */
 .quick-actions {
   display: flex;
   gap: 10px;
@@ -212,7 +207,6 @@
   border-color: #662222;
 }
 
-/* --- PULSANTE TIMEOUT STILIZZATO E CENTRATO --- */
 .timeout-container {
   display: flex;
   align-items: center;
@@ -233,17 +227,11 @@
   font-size: 0.85rem;        
   text-transform: uppercase;
   letter-spacing: 2px;
-  
-  /* Margini azzerati per evitare spinte */
   margin: 0;
-  
-  /* Dimensioni super compatte */
   padding: 15px 10px;        
   border-radius: 14px;       
-  
   writing-mode: vertical-lr;
   text-orientation: upright;
-  
   box-shadow: 0 4px 12px rgba(255, 0, 127, 0.4);
   transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
   text-align: center;

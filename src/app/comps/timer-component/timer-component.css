@@ -31,7 +31,7 @@
 }
 
 .timer-render-area:hover {
-  border-color: #f830ff;
+  border-color: rgb(224, 125, 125);
   transform: scale(1.01);
 }
 

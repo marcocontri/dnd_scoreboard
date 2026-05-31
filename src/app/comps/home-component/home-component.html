@@ -21,7 +21,7 @@
          </div>
          <div class="fouls-box">
             <span class="label">FALLI</span>
-            <button class="fouls-icon-btn" [class.fouls-danger]="homeFouls() >= 4" (click)="incrementHomeFouls()">
+            <button class="fouls-icon-btn" [class.fouls-danger]="homeFouls() > 4" (click)="incrementHomeFouls()">
                @if (homeFouls() <= 5) {
                {{homeFouls()}}
                }@else {
@@ -33,10 +33,10 @@
 
       <div class="quick-actions">
          <button class="btn-minus" (click)="decrementHomeScore()" title="Diminuisci Punti">-1 Punti</button>
-         <button class="btn-minus" (click)="decrementHomeFouls()" title="Diminuisci Falli">-1 Falli</button>
          <button class="btn-reset" (click)="resetHome()" title="Resetta Squadra">
             <i class="bi bi-arrow-counterclockwise"></i> Reset
          </button>
+         <button class="btn-minus" (click)="decrementHomeFouls()" title="Diminuisci Falli">-1 Falli</button>
       </div>
    </div>
 
