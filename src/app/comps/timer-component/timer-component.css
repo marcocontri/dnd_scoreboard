@@ -9,19 +9,12 @@
   margin-bottom: 10px;
 }
 
-/* Area interattiva del timer (Grande, pulita e retroilluminata al passaggio del mouse) */
 .timer-render-area {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  /* RIMOSSO height: 250px; <-- Questo bloccava la crescita del box */
-  width: max-content;       /* <-- Stringe il box orizzontalmente sul tempo */
-  
-  /* REGOLA DA QUI LO SPAZIO SOPRA E SOTTO: 
-     20px sopra/sotto, 40px a destra/sinistra. I numeri guideranno l'altezza! */
+  width: max-content;
   padding: 20px 40px; 
-  
   background-color: #0f0f12; 
   border: 3px solid #1f1f24;
   border-radius: 20px;
@@ -35,7 +28,6 @@
   transform: scale(1.01);
 }
 
-/* Display digitale del tabellone */
 .digital-display {
   display: flex;
   flex-direction: column;
@@ -43,30 +35,24 @@
   text-align: center;
 }
 
-/* Cifre del timer giganti */
 .digits {
   font-family: 'Courier New', Courier, monospace; 
   font-size: 20rem; 
   font-weight: 900;
   color: #ff3b30; 
   letter-spacing: -2px;
-  
-  /* IMPRESCINDIBILE: un line-height leggermente ridotto impedisce al font 
-     di generare spazi vuoti invisibili sopra e sotto la cifra */
   line-height: 0.85; 
   display: inline-block;
   
   text-shadow: 0 0 20px rgba(255, 59, 48, 0.6), 0 0 40px rgba(255, 59, 48, 0.3);
 }
 
-/* I decimi di secondo leggermente staccati o più piccoli per gerarchia visiva */
 .ms {
   font-size: 12rem;
   color: #ff453a;
   font-weight: 700;
 }
 
-/* --- INTERFACCIA DI EDITING --- */
 .timer-edit-card {
   background: #18181c;
   border: 2px solid #2d2d35;
