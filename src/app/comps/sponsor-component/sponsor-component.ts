@@ -1,76 +1,60 @@
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
 
 declare const require: any;
 @Component({
   selector: 'sponsor-component',
-  imports: [],
+  imports: [RouterLink, CommonModule],
   templateUrl: './sponsor-component.html',
   styleUrl: './sponsor-component.css',
 })
-export class SponsorComponent implements OnInit, OnDestroy{
-  validSponsors = signal<string[]>([]);
-  
-  // Questo Signal serve come esca per testare un'immagine alla volta nell'HTML
-  currentTestingPath = signal<string | null>(null);
-  
-  currentIndex = signal(0);
-  isReady = signal(false);
-  
-  private testingIndex = 1;
-  private intervalId: any;
+export class SponsorComponent implements OnInit, OnDestroy {
+  sponsors: string[] = [];
+  currentImage = signal<string>('');
+  currentIndex: number = 0;
+  private timerSubscription?: Subscription;
 
-  ngOnInit() {
-    // Avvia la catena di controllo partendo dal primo potenziale sponsor
-    this.testNextSponsor();
-  }
+  constructor(private http: HttpClient) {}
 
-  // Prepara l'esca nell'HTML per il prossimo file
-  private testNextSponsor() {
-    this.currentTestingPath.set(`images/sponsors/sponsor${this.testingIndex}.png`);
-  }
-
-  // Chiamata dall'HTML quando l'esca corrente si carica con successo (il file esiste!)
-  onImageLoadSuccess() {
-    const path = this.currentTestingPath();
-    if (path) {
-      // Aggiunge lo sponsor valido alla lista
-      this.validSponsors.update(current => [...current, path]);
-      
-      // Incrementa l'indice e passa a testare il file successivo
-      this.testingIndex++;
-      this.testNextSponsor();
-    }
-  }
-
-  // Chiamata dall'HTML quando l'esca fallisce (le immagini nella cartella sono finite!)
-  onImageLoadError() {
-    console.log(`[TS] Scansione cartella completata. Sponsor totali trovati: ${this.validSponsors().length}`);
-    
-    // Rimuove l'esca per pulire l'HTML
-    this.currentTestingPath.set(null);
-    
-    // Attiva la vista del carosello se è stato trovato almeno uno sponsor valido
-    if (this.validSponsors().length > 0) {
-      this.isReady.set(true);
-      
-      // Avvia lo scorrimento automatico solo se gli sponsor da alternare sono più di uno
-      if (this.validSponsors().length > 1) {
-        this.startCarousel();
+  ngOnInit(): void {
+    // Legge il file JSON che hai creato manualmente nella cartella public
+    this.http.get<string[]>('sponsors.json').subscribe({
+      next: (data) => {
+        this.sponsors = data;
+        
+        // Verifica che il JSON non sia vuoto
+        if (this.sponsors.length > 0) {
+          this.setCurrentImage();
+          this.startCarousel();
+        }
+      },
+      error: (err) => {
+        console.error('Errore: controlla che il file public/sponsors.json esista e sia scritto correttamente.', err);
       }
-    }
+    });
   }
 
-  startCarousel() {
-    if (this.intervalId) clearInterval(this.intervalId);
-
-    this.intervalId = setInterval(() => {
-      this.currentIndex.update(idx => (idx + 1) % this.validSponsors().length);
-    }, 1000); // Cambia sponsor ogni 5 secondi
+  startCarousel(): void {
+    this.timerSubscription = interval(2000).subscribe(() => {
+      // Incrementa l'indice. Il simbolo '%' (modulo) fa sì che dopo l'ultima immagine si ricominci da 0
+      this.currentIndex = (this.currentIndex + 1) % this.sponsors.length;
+      this.setCurrentImage();
+    });
   }
 
-  ngOnDestroy() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
+  setCurrentImage(): void {
+    const path = `/images/sponsors/${this.sponsors[this.currentIndex]}`;
+    this.currentImage.set(path);
+    console.log(path)
+  }
+
+  ngOnDestroy(): void {
+    // Fondamentale: spegne il timer quando l'utente cambia pagina per evitare spreco di memoria/CPU
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
     }
   }
 }

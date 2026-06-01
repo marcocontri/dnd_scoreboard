@@ -1,16 +1,6 @@
-@if (currentTestingPath()) {
-<img [src]="currentTestingPath()" (load)="onImageLoadSuccess()" (error)="onImageLoadError()" style="display: none;">
-}
-@if (isReady()) {
-    <div class="sponsor-container">
-        @for (path of validSponsors(); track path; let i = $index) {
-        <div class="sponsors-slide" [class.active]="i === currentIndex()">
-            <img [src]="path" alt="Sponsor Ufficiale">
-        </div>
-        }
+@if (currentImage()) {
+    <button class="btn-tabellone" routerLink="">Tabellone</button>
+    <div class="timeout-container">
+        <img class="sponsor-img" [src]="currentImage()" width="15%" style="display: block;">
     </div>
-    } @else if(!currentTestingPath() && validSponsors.length === 0) {
-        <div class="sponsor-error">Caricamento immagini sponsor...</div>
-    }
-
-<!-- <img src="images/sponsors/sponsor1.png" height="720px" alt=""> -->
+}

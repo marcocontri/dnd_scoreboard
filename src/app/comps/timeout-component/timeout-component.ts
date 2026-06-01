@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from "@angular/router";
 import { SponsorComponent } from "../sponsor-component/sponsor-component";
 import { TabelloneService } from '../../services/tabellone/tabellone-service';
 import { TimerService } from '../../services/timer/timer-service';
 
 @Component({
   selector: 'app-timeout-component',
-  imports: [RouterLink, SponsorComponent],
+  imports: [SponsorComponent],
   templateUrl: './timeout-component.html',
   styleUrl: './timeout-component.css',
 })
